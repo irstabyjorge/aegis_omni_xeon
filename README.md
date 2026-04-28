@@ -107,6 +107,12 @@ AEGIS_PORT=9000 python3 -m modules.api_server
 | `GET /api/logs/analysis` | System log security analysis |
 | `GET /api/logs/threats` | AEGIS threat log analysis |
 | `GET /api/predict` | ML-based threat prediction |
+| `GET /api/vuln` | Vulnerability scan with security score |
+| `GET /api/ioc` | Indicators of Compromise scan |
+| `GET /api/forensics` | Full forensic state capture |
+| `GET /api/passwords` | Password policy & credential audit |
+| `GET /api/payloads` | Web attack payload detection |
+| `GET /api/honeypot` | Honeypot connection analytics |
 
 ### Log Analyzer (`modules/log_analyzer.py`)
 Pattern-based security log analysis engine. Scans system logs (`auth.log`, `syslog`, `kern.log`, `ufw.log`) for attack signatures including brute force attempts, privilege escalation, SSH scanning, suspicious commands, account changes, and firewall modifications.
@@ -139,6 +145,59 @@ python3 -m modules.vuln_scanner
 
 Produces a security score (0-10) with findings categorized as critical, warning, or passed.
 
+### Honeypot (`modules/honeypot.py`)
+Lightweight decoy service that opens fake ports (SSH, FTP, Telnet, MySQL, Redis, Elasticsearch) with realistic service banners. Logs every connection attempt with full metadata for threat intelligence. Captures attacker payloads and identifies repeat offenders.
+
+```bash
+# Start honeypot on default decoy ports
+python3 -m modules.honeypot
+
+# Analyze captured honeypot data
+python3 -m modules.honeypot analyze
+```
+
+### IOC Scanner (`modules/ioc_scanner.py`)
+Indicators of Compromise detection. Scans for suspicious processes (crypto miners, reverse shells), persistence mechanisms (malicious cron jobs, ld.so.preload hijacking), rogue SSH keys, hidden files in temp directories, DNS hijacking, and suspicious shell history entries.
+
+```bash
+python3 -m modules.ioc_scanner
+```
+
+### Forensics Toolkit (`modules/forensics.py`)
+System forensic analysis and evidence collection. Captures volatile system state (processes, connections, routing, ARP cache, kernel modules), analyzes recent file changes in critical directories, audits user accounts for UID-0 backdoors, and generates SHA-256 hashes of critical system binaries.
+
+```bash
+# Full forensic capture (saves report to logs/)
+python3 -m modules.forensics
+
+# Volatile state only
+python3 -m modules.forensics volatile
+
+# Hash critical binaries
+python3 -m modules.forensics hashes
+```
+
+### Password Auditor (`modules/password_audit.py`)
+Credential security assessment. Checks password aging policies, empty passwords, PAM configuration (complexity requirements, account lockout), password hashing algorithm strength, and brute force login attempts from `/var/log/btmp`.
+
+```bash
+python3 -m modules.password_audit
+```
+
+### Payload Detector (`modules/payload_detector.py`)
+Web attack payload and exploit signature detection engine. Scans web server logs and files for SQL injection, XSS, command injection, path traversal, web shells, XXE, SSRF, and Log4Shell patterns. Inspired by SecLists and PayloadsAllTheThings.
+
+```bash
+# Scan web server logs
+python3 -m modules.payload_detector web
+
+# Scan a specific file
+python3 -m modules.payload_detector scan /var/log/nginx/access.log
+
+# Scan a directory for web shells
+python3 -m modules.payload_detector dir /var/www/html
+```
+
 ## Project Structure
 
 ```
@@ -153,10 +212,15 @@ aegis_omni_xeon/
     logs/                  # JSONL event logs and threat logs
     modules/
         __init__.py
-        api_server.py      # REST API server
+        api_server.py      # REST API server (18 endpoints)
         log_analyzer.py    # Security log analysis engine
         uptime_monitor.py  # Service availability monitoring
         vuln_scanner.py    # Vulnerability assessment scanner
+        honeypot.py        # Decoy service intrusion detection
+        ioc_scanner.py     # Indicators of Compromise detection
+        forensics.py       # Forensic analysis & evidence collection
+        password_audit.py  # Credential security assessment
+        payload_detector.py # Web attack payload detection
 ```
 
 ## Logging
