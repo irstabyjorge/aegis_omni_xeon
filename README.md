@@ -9,7 +9,9 @@ AEGIS OMNI-XEON is a real-time security monitoring suite built in Python. It pro
 ## Features
 
 - **Real-time System Monitoring** -- CPU, memory, disk, boot time, process inspection
+- **QByte-22 Threat Engine** -- Real IP threat scoring with 50+ signal vectors (Tor exits, scanner nets, threat intel, bogon ranges)
 - **Network Threat Scanner** -- Detects suspicious ports, high-frequency remote connections, and crypto-mining activity
+- **Auto-Blocklisting** -- Automatically blocks high-threat IPs with persistent blocklist database
 - **Authentication Log Auditor** -- Parses auth.log and syslog for failed logins, privilege escalation, and session anomalies
 - **Firewall Inspector** -- Reports UFW and iptables status at a glance
 - **Predictive Threat Modeling** -- ML-based risk classification using scikit-learn
@@ -22,9 +24,9 @@ AEGIS OMNI-XEON is a real-time security monitoring suite built in Python. It pro
 
 | Mode | Script | Purpose |
 |------|--------|---------|
-| **Simulation** | `aegis_omni.py` | Threat simulation and predictive modeling sandbox |
-| **Real System** | `aegis_real.py` | Live system monitoring with actual network/auth data |
-| **Unified** | `aegis_unified.py` | Full-featured production mode combining all capabilities |
+| **OMNI-XEON** | `aegis_omni.py` | Full autonomous security operations with QByte-22 engine and ML prediction |
+| **Real System** | `aegis_real.py` | Live system monitoring with real network/auth data |
+| **Unified** | `aegis_unified.py` | Production platform combining all capabilities |
 
 ## Quick Start
 
@@ -45,19 +47,21 @@ python3 aegis_unified.py
 ## Commands (Unified Mode)
 
 ```
-status        -- System health overview
-listeners     -- Show listening network services
-connections   -- Show active network connections
-threats       -- Run threat scan on all connections
-auth          -- Audit authentication logs
-firewall      -- Show firewall rules and status
-packages      -- List installed packages
-entropy       -- Generate cryptographic key material
-all           -- Run full security audit
-watch         -- Continuous threat monitoring (10s interval)
-logs          -- View recent event log
-help          -- Show available commands
-exit          -- Quit
+status           -- System health overview
+listeners        -- Show listening ports with risk flags
+connections      -- Show active connections
+threats          -- Scan live connections with QByte-22 engine
+scan <ip> [port] -- Analyze specific IP threat level
+auth             -- Audit authentication logs
+firewall         -- Show firewall rules and status
+packages         -- List installed packages
+entropy          -- Generate cryptographic key material
+blocklist        -- Show auto-blocked IPs
+all              -- Run full security audit
+watch            -- Continuous threat monitoring (10s interval)
+logs             -- View recent event log
+help             -- Show available commands
+exit             -- Quit
 ```
 
 ## Requirements
@@ -80,13 +84,14 @@ cryptography
 
 ```
 aegis_omni_xeon/
-    aegis_omni.py          # Simulation mode -- threat modeling sandbox
-    aegis_real.py          # Real system mode -- live monitoring
-    aegis_unified.py       # Unified mode -- full production suite
+    aegis_omni.py          # OMNI-XEON -- full autonomous security with QByte-22 + ML
+    aegis_real.py          # Real system -- live network/auth/firewall monitoring
+    aegis_unified.py       # Unified -- production platform combining all modules
     requirements.txt       # Python dependencies
+    pyproject.toml         # Package metadata
     config/                # Configuration files
-    data/                  # Runtime data
-    logs/                  # JSONL event logs (auto-generated)
+    data/                  # Blocklists, known-good IPs, runtime data
+    logs/                  # JSONL event logs and threat logs
     modules/               # Extension modules
 ```
 
