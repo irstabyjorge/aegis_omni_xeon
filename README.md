@@ -80,6 +80,65 @@ psutil
 cryptography
 ```
 
+## Modules
+
+### API Server (`modules/api_server.py`)
+REST API exposing all AEGIS capabilities over HTTP. Zero external dependencies — built on Python's `http.server`. Endpoints for threat scanning, connection monitoring, log analysis, entropy generation, uptime checks, and predictive modeling.
+
+```bash
+# Start the API server (default port 8443)
+python3 -m modules.api_server
+
+# Or set a custom port
+AEGIS_PORT=9000 python3 -m modules.api_server
+```
+
+**Endpoints:**
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/status` | System health overview |
+| `GET /api/threats` | Scan live connections with QByte-22 |
+| `GET /api/scan/<ip>` | Analyze specific IP threat level |
+| `GET /api/connections` | Active network connections |
+| `GET /api/listeners` | Listening ports with risk flags |
+| `GET /api/entropy` | Generate cryptographic key material |
+| `GET /api/blocklist` | Auto-blocked IP list |
+| `GET /api/uptime` | Service availability report |
+| `GET /api/logs/analysis` | System log security analysis |
+| `GET /api/logs/threats` | AEGIS threat log analysis |
+| `GET /api/predict` | ML-based threat prediction |
+
+### Log Analyzer (`modules/log_analyzer.py`)
+Pattern-based security log analysis engine. Scans system logs (`auth.log`, `syslog`, `kern.log`, `ufw.log`) for attack signatures including brute force attempts, privilege escalation, SSH scanning, suspicious commands, account changes, and firewall modifications.
+
+```bash
+# Analyze system logs
+python3 -m modules.log_analyzer
+
+# Analyze AEGIS threat history
+python3 -m modules.log_analyzer threats
+```
+
+### Uptime Monitor (`modules/uptime_monitor.py`)
+Service availability tracking with HTTP endpoint monitoring, TCP port checks, DNS resolution verification, and SSL certificate expiry warnings.
+
+```bash
+# Run a single check
+python3 -m modules.uptime_monitor
+
+# Continuous monitoring (every 30 seconds)
+python3 -m modules.uptime_monitor watch
+```
+
+### Vulnerability Scanner (`modules/vuln_scanner.py`)
+Local system security assessment. Checks SUID files, world-writable files, SSH configuration, firewall status, auto-updates, exposed ports, sensitive file permissions, root execution, and kernel hardening (ASLR, ptrace, core dumps).
+
+```bash
+python3 -m modules.vuln_scanner
+```
+
+Produces a security score (0-10) with findings categorized as critical, warning, or passed.
+
 ## Project Structure
 
 ```
@@ -92,7 +151,12 @@ aegis_omni_xeon/
     config/                # Configuration files
     data/                  # Blocklists, known-good IPs, runtime data
     logs/                  # JSONL event logs and threat logs
-    modules/               # Extension modules
+    modules/
+        __init__.py
+        api_server.py      # REST API server
+        log_analyzer.py    # Security log analysis engine
+        uptime_monitor.py  # Service availability monitoring
+        vuln_scanner.py    # Vulnerability assessment scanner
 ```
 
 ## Logging
