@@ -78,6 +78,14 @@ def check_ssh_config():
 def check_firewall():
     ufw = _run("sudo -n ufw status 2>/dev/null || echo 'no_access'")
     active = "Status: active" in ufw
+    if not active and "no_access" in ufw:
+        iptables = _run("iptables -L -n 2>/dev/null | head -20 || echo 'no_access'")
+        nft = _run("nft list ruleset 2>/dev/null | head -5 || echo ''")
+        has_rules = ("Chain" in iptables and "ACCEPT" not in iptables.split('\n')[2] if len(iptables.split('\n')) > 2 else False) or bool(nft.strip())
+        ufw_enabled = _run("cat /etc/ufw/ufw.conf 2>/dev/null | grep ENABLED")
+        if "ENABLED=yes" in ufw_enabled:
+            active = True
+            ufw = "Status: active (verified via config, no sudo)"
     return {
         "check": "firewall_status",
         "severity": 8 if not active else 1,

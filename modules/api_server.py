@@ -188,8 +188,9 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
 
 def main():
     port = int(os.environ.get("AEGIS_PORT", 8443))
-    server = HTTPServer(("0.0.0.0", port), AegisAPIHandler)
-    print(f"AEGIS API Server v{__version__} running on http://0.0.0.0:{port}")
+    bind = os.environ.get("AEGIS_BIND", "127.0.0.1")
+    server = HTTPServer((bind, port), AegisAPIHandler)
+    print(f"AEGIS API Server v{__version__} running on http://{bind}:{port}")
     print(f"Endpoints: http://localhost:{port}/")
     try:
         server.serve_forever()

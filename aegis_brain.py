@@ -214,7 +214,8 @@ class AegisBrain:
         sys.path.insert(0, str(BASE))
         from aegis_chat import match_intent, execute_intent
         intent, args = match_intent(user_msg)
-        return execute_intent(intent, args)
+        result = execute_intent(intent, args)
+        return result or "I'm not sure how to handle that. Try 'help' to see what I can do, or configure an API key for full AI chat:\n  set key anthropic YOUR_KEY\n  set key openai YOUR_KEY"
 
     def chat(self, user_msg):
         if user_msg.lower().startswith("set key anthropic "):
@@ -248,6 +249,9 @@ class AegisBrain:
                 # Fall back to local
                 response = self.chat_local(user_msg)
                 source = "local"
+
+        if not response:
+            response = "I couldn't process that request. Try 'help' for available commands."
 
         self.conversation_history.append({"user": user_msg, "assistant": response})
         self.memory.save_conversation(user_msg, response)
