@@ -142,6 +142,7 @@ class AegisBrain:
         self.conversation_history = []
         self._anthropic_client = None
         self._openai_client = None
+        self._claude_disabled = False
 
     def _get_anthropic(self):
         if self._anthropic_client is None:
@@ -179,6 +180,8 @@ class AegisBrain:
         return system, messages
 
     def chat_claude(self, user_msg):
+        if self._claude_disabled:
+            return None
         client = self._get_anthropic()
         if not client:
             return None
@@ -189,10 +192,14 @@ class AegisBrain:
                 max_tokens=2048,
                 system=system,
                 messages=messages,
+                timeout=10.0,
             )
             return response.content[0].text
         except Exception as e:
-            return f"[Claude API error: {e}]"
+            err = str(e)
+            if "credit balance" in err or "billing" in err or "payment" in err:
+                self._claude_disabled = True
+            return None
 
     def chat_openai(self, user_msg):
         client = self._get_openai()
@@ -236,14 +243,14 @@ class AegisBrain:
 
         response = None
 
-        # Try Claude first
+        # Try Claude first (skipped if billing issue detected)
         response = self.chat_claude(user_msg)
-        if response and not response.startswith("[Claude API error"):
+        if response:
             source = "claude"
         else:
             # Try OpenAI
             response = self.chat_openai(user_msg)
-            if response and not response.startswith("[OpenAI API error"):
+            if response:
                 source = "openai"
             else:
                 # Fall back to local
