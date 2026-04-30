@@ -906,6 +906,57 @@ class AegisChatGUI:
         self.cmd_history = []
         self.history_idx = -1
 
+        # ── Keyboard shortcuts ──
+        self.root.bind("<Control-l>", lambda e: self._clear_chat())
+        self.root.bind("<Control-L>", lambda e: self._clear_chat())
+        self.root.bind("<F1>", lambda e: self._run_tool("full_audit"))
+        self.root.bind("<F2>", lambda e: self._run_tool("vuln_scan"))
+        self.root.bind("<F5>", lambda e: self._run_tool("system_info"))
+        self.root.bind("<Control-comma>", lambda e: self._open_settings())
+        self.root.bind("<Control-e>", lambda e: self._export_chat())
+        self.root.bind("<Control-E>", lambda e: self._export_chat())
+        self.root.bind("<Control-t>", lambda e: self._open_tools())
+        self.root.bind("<Control-T>", lambda e: self._open_tools())
+        self.root.bind("<Escape>", lambda e: self.entry.delete(0, tk.END))
+
+        # ── Right-click context menu on chat widget ──
+        self._chat_ctx_menu = tk.Menu(self.chat, tearoff=0,
+                                       bg="#1a1a1a", fg=t["text"],
+                                       activebackground=t["accent_dim"],
+                                       activeforeground=t["text_bright"],
+                                       font=(ff, 10))
+        self._chat_ctx_menu.add_command(label="Copy",
+                                         accelerator="Ctrl+C",
+                                         command=self._ctx_copy)
+        self._chat_ctx_menu.add_command(label="Select All",
+                                         accelerator="Ctrl+A",
+                                         command=self._ctx_select_all)
+        self._chat_ctx_menu.add_separator()
+        self._chat_ctx_menu.add_command(label="Clear Chat",
+                                         command=self._clear_chat)
+        self._chat_ctx_menu.add_command(label="Export Chat",
+                                         command=self._export_chat)
+        self.chat.bind("<Button-3>", self._show_chat_ctx_menu)
+
+    def _show_chat_ctx_menu(self, event):
+        try:
+            self._chat_ctx_menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            self._chat_ctx_menu.grab_release()
+
+    def _ctx_copy(self):
+        try:
+            sel = self.chat.get(tk.SEL_FIRST, tk.SEL_LAST)
+            self.root.clipboard_clear()
+            self.root.clipboard_append(sel)
+        except tk.TclError:
+            pass  # no selection
+
+    def _ctx_select_all(self):
+        self.chat.config(state=tk.NORMAL)
+        self.chat.tag_add(tk.SEL, "1.0", tk.END)
+        self.chat.config(state=tk.DISABLED)
+
     def _show_welcome(self):
         t = self.theme
         self._append_aegis(f"""AEGIS AI v{__version__} — Advanced Security Assistant

@@ -143,6 +143,11 @@ class AegisBrain:
         self._anthropic_client = None
         self._openai_client = None
         self._claude_disabled = False
+        self._openai_disabled = False
+        config = load_config()
+        self._claude_model = config.get("claude_model", "claude-sonnet-4-20250514")
+        self._openai_model = config.get("openai_model", "gpt-4o")
+        self._custom_system_prompt = config.get("custom_system_prompt")
 
     def _get_anthropic(self):
         if self._anthropic_client is None:
@@ -168,7 +173,7 @@ class AegisBrain:
 
     def _build_messages(self, user_msg):
         context = self.memory.get_context_summary()
-        system = SYSTEM_PROMPT
+        system = self._custom_system_prompt if self._custom_system_prompt else SYSTEM_PROMPT
         if context:
             system += f"\n\n{context}"
 
@@ -188,7 +193,7 @@ class AegisBrain:
         system, messages = self._build_messages(user_msg)
         try:
             response = client.messages.create(
-                model="claude-sonnet-4-20250514",
+                model=self._claude_model,
                 max_tokens=2048,
                 system=system,
                 messages=messages,
@@ -202,6 +207,8 @@ class AegisBrain:
             return None
 
     def chat_openai(self, user_msg):
+        if self._openai_disabled:
+            return None
         client = self._get_openai()
         if not client:
             return None
@@ -209,13 +216,17 @@ class AegisBrain:
         oai_messages = [{"role": "system", "content": system}] + messages
         try:
             response = client.chat.completions.create(
-                model="gpt-4o",
+                model=self._openai_model,
                 messages=oai_messages,
                 max_tokens=2048,
+                timeout=15.0,
             )
             return response.choices[0].message.content
         except Exception as e:
-            return f"[OpenAI API error: {e}]"
+            err = str(e)
+            if any(kw in err.lower() for kw in ("billing", "credits", "quota", "rate_limit", "rate limit", "insufficient_quota")):
+                self._openai_disabled = True
+            return None
 
     def chat_local(self, user_msg):
         sys.path.insert(0, str(BASE))
