@@ -1,0 +1,435 @@
+{
+  "commit": "b51e587e14f6c81fb6e438cdbfb1ed1580ce1357",
+  "commits": [
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "JORGE FRANCISCO PAREDES",
+      "authored_at_declared": "2026-11-13T11:54:27-08:00",
+      "sha": "b51e587e14f6c81fb6e438cdbfb1ed1580ce1357",
+      "subject": "Merge PETS AEGIS IP Shield coverage charter"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "JORGE FRANCISCO PAREDES",
+      "authored_at_declared": "2026-11-13T11:53:00-08:00",
+      "sha": "57cd26a616a4e085fd0bba2902748c9524b0cca6",
+      "subject": "Add additive-only PETS AEGIS IP Shield coverage charter"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "JORGE FRANCISCO PAREDES",
+      "authored_at_declared": "2026-11-13T11:01:39-08:00",
+      "sha": "0c3d50f7b4ac1b6710c155a8a6c994e52ad39a50",
+      "subject": "Install AEGIS GitHub IP SHIELD provenance workflow (#1)"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T10:15:39-07:00",
+      "sha": "ebd39ad54a3a4a110258b2f568146eb75f71fa61",
+      "subject": "Harden API, optimize brain, add keyboard shortcuts"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T03:18:55-07:00",
+      "sha": "e233746762da2446f6cb43736fe42f6aaa09c681",
+      "subject": "Add AEGIS Studio — multimedia hub with 5 integrated tools"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T02:52:02-07:00",
+      "sha": "4c111555f84f69457bbc1259ac8966e41e934806",
+      "subject": "AEGIS v3.0 — full system hardening, GPU GUI rebuild, bug fixes"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T01:23:12-07:00",
+      "sha": "51c0dfc67890cd219092609349af26bfeadea9a4",
+      "subject": "Add Sovereign AI — 4-layer autonomous security system"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T01:07:22-07:00",
+      "sha": "84d1ffaf514f38f1e71072acb3aa1b42088a36c5",
+      "subject": "AEGIS AI v2.0 — AI chat, persistent daemon, full ML stack"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T00:37:04-07:00",
+      "sha": "92875850d83906ddf34510a67716d37a07d77b7d",
+      "subject": "Add AEGIS Chat — natural language security assistant with desktop GUI"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-30T00:32:49-07:00",
+      "sha": "627819072c1f3bd92a281f3f0f86c4415325dd0a",
+      "subject": "Wire all 9 modules into both CLI scripts — full integration"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-28T03:05:43-07:00",
+      "sha": "c43fc2bd02346ef468992d2f218f65c6a6ae81fc",
+      "subject": "Add honeypot, IOC scanner, forensics, password audit, payload detector"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-28T02:56:43-07:00",
+      "sha": "31ebd59ad31d44f222793a4fe5506eb155de96b3",
+      "subject": "Update README with module documentation — API, logs, uptime, vuln scanner"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-28T02:56:03-07:00",
+      "sha": "fa79cdadb00d64463cc341d2f34267560bdb754e",
+      "subject": "Add security modules: API server, log analyzer, uptime monitor, vuln scanner"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-28T02:48:42-07:00",
+      "sha": "5d237fc3f674edb54d80f161d6a5ca356b421bcb",
+      "subject": "Update README for v2.0 — remove simulation references, document QByte-22"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-28T02:45:37-07:00",
+      "sha": "c0b42c6212afc33e2780af2abba13c3c6ef7f43a",
+      "subject": "v2.0.0: Integrate QByte-22 real threat engine, remove all simulation"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-27T22:25:25-07:00",
+      "sha": "5f3bb0284d7f19ce7b78041ccd639b961d385908",
+      "subject": "Add CI pipeline for Python 3.10/3.11/3.12"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-27T22:13:54-07:00",
+      "sha": "f5bcd9020a7d3d205b193dbd2de766b14485d0aa",
+      "subject": "Temporarily remove CI workflow to allow initial push"
+    },
+    {
+      "author_email_sha256": "2ec9846aa81c35983fbe8f05ca33e064fdac37cd1a375bb7a60646bcb0575826",
+      "author_name_declared": "Jorge Francisco Paredes",
+      "authored_at_declared": "2026-04-27T21:41:36-07:00",
+      "sha": "f933ad52556aefe12b8683383d67e477ef46bbb8",
+      "subject": "Initial release: AEGIS OMNI-XEON v1.0.0"
+    }
+  ],
+  "file_count_recorded": 47,
+  "file_inventory_truncated_at_25000": false,
+  "files": [
+    {
+      "git_blob_oid": "fdcc2d40816281ba40bf442a571b9dfb6d110c0c",
+      "mode": "100644",
+      "path": ".github/FUNDING.yml",
+      "sha256": "4724e0acb77b28c33aec89cdbe2c48092752ba625c6df50b518a2565bbc01076"
+    },
+    {
+      "git_blob_oid": "496523ebf8a2f8179732701a82e626efb6977e8c",
+      "mode": "100644",
+      "path": ".github/workflows/aegis-ip-shield.yml",
+      "sha256": "6b128bd094d276f1cbe06adb086ac00a7489b6131663092ec8ffe077d54ac56b"
+    },
+    {
+      "git_blob_oid": "0074f1d613ec6fe160f6229b708fc27753cea711",
+      "mode": "100644",
+      "path": ".github/workflows/ci.yml",
+      "sha256": "4c5811cdbb5d42a33338712cf4c85c65eab9e0080fe0860855129c48846d0490"
+    },
+    {
+      "git_blob_oid": "b4b6984f474ecaed1ebc55f995cf1fbe6d6945c1",
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha256": "6a0aa37bac0a431ca7887be2b08a27fc1591ffc3e0a3567926a2b7fc608b408e"
+    },
+    {
+      "git_blob_oid": "d79abc72c32846ebda5bcd90ab42dc1b842bed8b",
+      "mode": "100644",
+      "path": "COMMERCIAL_LICENSE.md",
+      "sha256": "27a02e4747895e9005e02e6d19b1f335e6b72214bfb6357ec763a3bb1524ae05"
+    },
+    {
+      "git_blob_oid": "ad978bc64c12a601ed1cec880f716162f0dd4b7d",
+      "mode": "100644",
+      "path": "CONTRIBUTING.md",
+      "sha256": "62858d61aa0b753fdb8fdb37144f6098ad84f157ca4c22b523f863e0a78be3ab"
+    },
+    {
+      "git_blob_oid": "d56e845d57a3c9309b05fdc09605173471b25d54",
+      "mode": "100644",
+      "path": "LICENSE",
+      "sha256": "171c287e6a54fd2de0a036e4d2e3af968fe32b9ff8417e88359b6a2175c916eb"
+    },
+    {
+      "git_blob_oid": "de7a8521d038b6db202d7a2966a22eaab2a830e3",
+      "mode": "100644",
+      "path": "README.md",
+      "sha256": "9eaef067456a19abf2589301d638fb407c89cda3fc8531a6604db9e19694004a"
+    },
+    {
+      "git_blob_oid": "96edef8c829f0695b7e8874ca9475766b21fca6b",
+      "mode": "100644",
+      "path": "SECURITY.md",
+      "sha256": "dfe9321292adbaa55bed914d0960cfbbe0199c0347daab0bfa969b5bd23516eb"
+    },
+    {
+      "git_blob_oid": "36515338004e18d7f4a4078d855f8f961829bc16",
+      "mode": "100644",
+      "path": "aegis_brain.py",
+      "sha256": "f8e4d161dd2c80e9df4a452abf09a28232a806a38000f488b97a64fda290a4a5"
+    },
+    {
+      "git_blob_oid": "15f531a57d5875d5c556c55a34ae3625d4436855",
+      "mode": "100644",
+      "path": "aegis_chat.py",
+      "sha256": "1ad1a5cb6c228d530a0f6cad8ee08cf6142145e9254bb2cdf35d4bbde6779949"
+    },
+    {
+      "git_blob_oid": "2a85f94f5825491f43dffaf84d3464df69f6b788",
+      "mode": "100644",
+      "path": "aegis_daemon.py",
+      "sha256": "6ab356e74f3817fc78149e4081cc5c4b47309a7d46468e1d48d5d788b01640fd"
+    },
+    {
+      "git_blob_oid": "ffdf0d0aee4e96074e8604cb3434f25d321a3cbc",
+      "mode": "100644",
+      "path": "aegis_icon.svg",
+      "sha256": "2e0d09713e382aa46cb646f5740938a5b2e8b74d70a77945f2171989e1509edc"
+    },
+    {
+      "git_blob_oid": "93f537ed6e0cf7e5fa50d56f9789cd3a146bbb2a",
+      "mode": "100755",
+      "path": "aegis_omni.py",
+      "sha256": "4ff822f475686ab3afdcf214c904dad8dbbdca2b0698eb896f0266bbe7ddad57"
+    },
+    {
+      "git_blob_oid": "aa92247ec02b28dbe92b15826e1eefe7a4fef34f",
+      "mode": "100755",
+      "path": "aegis_real.py",
+      "sha256": "b6763e134c3e8a48b3a04017e346455e3cb879601f76b8403e05f6e73ab5602d"
+    },
+    {
+      "git_blob_oid": "4dcca0fd226f14ed4e0405a2d22855240c670bcc",
+      "mode": "100644",
+      "path": "aegis_studio.py",
+      "sha256": "f63cf070bdb4e298c4dc17fa88197fd25890b60e337cce6bf75f3010ec25d28c"
+    },
+    {
+      "git_blob_oid": "c2f74dc09a6c56aca19df7b1430beb56afd7ca0f",
+      "mode": "100755",
+      "path": "aegis_unified.py",
+      "sha256": "14a103e9e8ad5636eafd104537d03e2bad813254e5659714f2a50708ae84774b"
+    },
+    {
+      "git_blob_oid": "61ef9f20140713ff8aa713b0334418376d896c40",
+      "mode": "100644",
+      "path": "docs/IP_SHIELD_GITHUB.md",
+      "sha256": "33dcbb120bd146be225a62b6b764dc76f603d7bae4274ba840bddca679aa0001"
+    },
+    {
+      "git_blob_oid": "6d259b6574ddd2e833f30672b7172e9711f95134",
+      "mode": "100644",
+      "path": "docs/PETS_AEGIS_IP_SHIELD_COVERAGE_CHARTER.md",
+      "sha256": "d7d5987c5216759b02a9780b16c077d7cacf59c3a8cc09e342fb8830fe82c664"
+    },
+    {
+      "git_blob_oid": "d5facd1d85f849da3b457cb2064aa72bd2a44638",
+      "mode": "100755",
+      "path": "install_service.sh",
+      "sha256": "1c3646207a6de19329a4515f5453af09a644366eaeedf12bde986b81ac84f8c9"
+    },
+    {
+      "git_blob_oid": "25fc1d49bedad60da40e9754215a8c0d26e7b0d9",
+      "mode": "100755",
+      "path": "merge_autonomous_system.sh",
+      "sha256": "11e81dbdb837a56a83f71a1b4a77e7fe580e143c7928db092c7d3b5ce29d8b24"
+    },
+    {
+      "git_blob_oid": "74472904495d723441012f1d837c7e2b249382a7",
+      "mode": "100644",
+      "path": "modules/__init__.py",
+      "sha256": "43a8d262ab094b628582a35b469cdfcc2d950682368d013ed574f915a38dc904"
+    },
+    {
+      "git_blob_oid": "759bccd359d85676bb604303c5e350d260a5f3f4",
+      "mode": "100644",
+      "path": "modules/api_server.py",
+      "sha256": "259d8dc213ed90f495120480bdd18cf0b8290ebe5259bc553b60d2095dda38d8"
+    },
+    {
+      "git_blob_oid": "68b7fbff7846f6df37cb4e7f1eae678dda7a6ea5",
+      "mode": "100644",
+      "path": "modules/forensics.py",
+      "sha256": "837f96982c6771526f15b43e3011c45acb5e1518aa10347748b297b8a9966acc"
+    },
+    {
+      "git_blob_oid": "b32d29fef314acc355fde0fa5720cc0ee942d3b9",
+      "mode": "100644",
+      "path": "modules/honeypot.py",
+      "sha256": "8abb02d8427e4e45d0f9379cd7c6d7a682b91d9018ba03f38671f33ee9ebd405"
+    },
+    {
+      "git_blob_oid": "174d1ae28dec418fbdb7ea47642029daeb2def68",
+      "mode": "100644",
+      "path": "modules/ioc_scanner.py",
+      "sha256": "9b7cef4a48878bb37a17ee3f18f0446586ec3c878b57899eedaada60c7499bd2"
+    },
+    {
+      "git_blob_oid": "877f20c4098ae4177a629700d2a62022e0486a09",
+      "mode": "100644",
+      "path": "modules/log_analyzer.py",
+      "sha256": "847f3461e2ba9b01f82551b85e6d6874979e00c1d51b7dec5d4a61bdd824cbff"
+    },
+    {
+      "git_blob_oid": "7eafea9dc68f3b62fb0130aece31dcbdf8cd92b7",
+      "mode": "100644",
+      "path": "modules/password_audit.py",
+      "sha256": "3d2bd48f3c0380afcab93663a840e9106e6e83199dc0c5e531cdf6858a83466c"
+    },
+    {
+      "git_blob_oid": "17cba11df7b83cf577c8a81d11312b005f402a2a",
+      "mode": "100644",
+      "path": "modules/payload_detector.py",
+      "sha256": "750e04ccaf2e9b4405db1beba67381b2f1e41973cebbac925d31ab8c5374042f"
+    },
+    {
+      "git_blob_oid": "3102f50397fe42dc21cff9f9b35926d503851aa1",
+      "mode": "100644",
+      "path": "modules/uptime_monitor.py",
+      "sha256": "6eecf9cd45f3b628b5c4aadf9b039f527d5e5f53b5c840ba7d912593edce1e84"
+    },
+    {
+      "git_blob_oid": "5f0d680ca4b9123ed46794eed562d34e9934b0a7",
+      "mode": "100644",
+      "path": "modules/vuln_scanner.py",
+      "sha256": "13313f1f3aae3a9d1e26d32cbca5f789c3454e6678449c5d02e38e1bbc156d7c"
+    },
+    {
+      "git_blob_oid": "4fd693511c02651087b0a0d1f49a72dda0b06cc1",
+      "mode": "100644",
+      "path": "pyproject.toml",
+      "sha256": "6358b08a88d0028fa792b03423e4653c381db99872c4049cfd70447dce686b0e"
+    },
+    {
+      "git_blob_oid": "f412915ed871cc1c6d94c821efc922ddc0bfdc20",
+      "mode": "100644",
+      "path": "requirements.txt",
+      "sha256": "8d1e80aa5fdb377928c0948c4bce8d5dd95eb397e00a86d615c0735bb3733f9c"
+    },
+    {
+      "git_blob_oid": "c547bf4a04c9422856ece24823bacb9d0db02176",
+      "mode": "100755",
+      "path": "run.sh",
+      "sha256": "4477e99c39d9d9da3bea13209730547765da3e2766b9fe84d68f0913c56acdb1"
+    },
+    {
+      "git_blob_oid": "6c120ece34a4d28787865eeca2b8c476844daa42",
+      "mode": "100755",
+      "path": "run_real.sh",
+      "sha256": "481457e488c2f551d1f92f67ff53edd8824cfb37159d0b9a97435a7dcc50b7a7"
+    },
+    {
+      "git_blob_oid": "5af79b6669eca3943344eef0163a12f8f51f0b81",
+      "mode": "100755",
+      "path": "run_real_all.sh",
+      "sha256": "5cec3d8153014ea495175b04a70900bfedcdecde954945dde178ed49b12a56a7"
+    },
+    {
+      "git_blob_oid": "80942601b7f1d5ea20e7d35741cbc454b8394f92",
+      "mode": "100755",
+      "path": "run_ubuntu_fixed.sh",
+      "sha256": "208ec93e860e328c781157cfa6f114466ee8cc8a577e978025eaed862edaec28"
+    },
+    {
+      "git_blob_oid": "02adaea54f008df9fa40a1f38cdbd5b2941f33e8",
+      "mode": "100755",
+      "path": "run_unified.sh",
+      "sha256": "c39db7b35424f8de86aa657f0af532bcedeb7c15d81f336a784479eceaec28b5"
+    },
+    {
+      "git_blob_oid": "6b1cc8434e5a25d0ef906e42c45ecfc7705ff6f8",
+      "mode": "100755",
+      "path": "run_unified_all.sh",
+      "sha256": "7f1644c6985c13f76ccd30b27be6036f37bc41c0a6fd9192d0569017204d6fcd"
+    },
+    {
+      "git_blob_oid": "615c0c7a5991a1918ca70a19a9500802d1e5a9c5",
+      "mode": "100644",
+      "path": "sovereign-ai/core/system.js",
+      "sha256": "e9f309357041e59b2839ac18d7d3eea7f507aba6590e4be1ef3aac040dc86370"
+    },
+    {
+      "git_blob_oid": "17a70322241d17ef418b8f94ca20a578d25c388a",
+      "mode": "100644",
+      "path": "sovereign-ai/economic/economic.js",
+      "sha256": "068bff3de7329c6ab94045fc279587d33c2cb6ce2529bdd5c8e2636721a5a2e4"
+    },
+    {
+      "git_blob_oid": "92aa1026316e7af6566d51fabe058d09f33db75b",
+      "mode": "100644",
+      "path": "sovereign-ai/matrix/agents.js",
+      "sha256": "587b8ef6bc8b45795142ae534bee17f75c4aabd848074af94f9210be57ef39a5"
+    },
+    {
+      "git_blob_oid": "d3b17f8c841e8d40640e7f6dc206b1a00ceeb056",
+      "mode": "100644",
+      "path": "sovereign-ai/package-lock.json",
+      "sha256": "e07aede164d0ba69fe450b68f92220610fab8562414e27c754d57ca71cc9dcd4"
+    },
+    {
+      "git_blob_oid": "c81384cc3d1dfa4b115b4c88398436188f410b77",
+      "mode": "100644",
+      "path": "sovereign-ai/package.json",
+      "sha256": "0588812c87a1c7b8ca6351611681d581aae5fa1dd05b759f4e5b6e334ade45db"
+    },
+    {
+      "git_blob_oid": "f845b1d340c8bb5b68cd77db897901acc635516a",
+      "mode": "100644",
+      "path": "sovereign-ai/vector/memory.js",
+      "sha256": "07a428b14a658b83dc86892f2658af45ac60079a9c2fd302f5deaea3110b3c43"
+    },
+    {
+      "git_blob_oid": "59cd70a0e6ebddb342a0bec518169fb969350455",
+      "mode": "100755",
+      "path": "test_ubuntu_fixed.sh",
+      "sha256": "aeb003733d10adeb844918ce26af3a1731d51e24b3e730533fb4436c2993bd54"
+    },
+    {
+      "git_blob_oid": "a1d2638d1ac93f9bcf1ead4bfe9d9c57c8898785",
+      "mode": "100755",
+      "path": "upgrade_real_system.sh",
+      "sha256": "d68db676c61db6ddd42a53c3a31160de17a4c565f9239eec3afbcff1f1d2b6c7"
+    }
+  ],
+  "generated_at_utc_runner_clock": "2026-11-13T20:11:16.330527+00:00",
+  "limits": [
+    "Git author and timestamp fields are declared metadata, not verified identity or trusted time.",
+    "Hashes identify recorded bytes; they do not prove authorship, originality, ownership or infringement.",
+    "The report contains paths and hashes, not source-file contents.",
+    "The runner clock is not a trusted timestamp authority.",
+    "Third-party and joint contributions retain applicable rights and licenses.",
+    "The ledger branch is versioned evidence, not immutable storage.",
+    "Only this repository and triggered refs are covered."
+  ],
+  "manifest_type": "AEGIS_GITHUB_IP_SHIELD_PROVENANCE",
+  "manifest_version": "1.0",
+  "ref": "refs/heads/main",
+  "ref_name": "main",
+  "repository": "irstabyjorge/aegis_omni_xeon",
+  "tree": "f827dd6eefa98bfa06e17d6e57034a589cbda285",
+  "workflow_run_attempt": "1",
+  "workflow_run_id": "43496578273"
+}
