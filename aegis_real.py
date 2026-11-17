@@ -5,7 +5,7 @@
 __version__ = "1.0.0"
 
 import os, json, subprocess, hashlib
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 import psutil
 from rich.console import Console
@@ -18,7 +18,7 @@ LOGS = BASE / "logs"
 LOGS.mkdir(parents=True, exist_ok=True)
 
 def now():
-    return datetime.now(UTC).isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 def log(event, payload):
     with open(LOGS / "aegis_real_events.jsonl", "a") as f:
@@ -40,7 +40,7 @@ def system_status():
         "disk_percent": psutil.disk_usage("/").percent,
         "logical_cpus": psutil.cpu_count(logical=True),
         "physical_cpus": psutil.cpu_count(logical=False),
-        "boot_time": datetime.fromtimestamp(psutil.boot_time(), UTC).isoformat()
+        "boot_time": datetime.fromtimestamp(psutil.boot_time(), timezone.utc).isoformat()
     }
     log("system_status", data)
     return data
