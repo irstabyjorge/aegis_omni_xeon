@@ -8,7 +8,7 @@ Built with http.server (zero external deps). For production, use with FastAPI.
 
 import json, os, sys, re, secrets, stat, time, threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from collections import defaultdict
 from pathlib import Path
 
@@ -202,7 +202,7 @@ class AegisAPIHandler(BaseHTTPRequestHandler):
         })
 
     def _healthz(self):
-        self._respond(200, {"status": "ok", "engine": f"QByte-22 v{__version__}", "time": datetime.now(UTC).isoformat()})
+        self._respond(200, {"status": "ok", "engine": f"QByte-22 v{__version__}", "time": datetime.now(timezone.utc).isoformat()})
 
     def _status(self):
         self._respond(200, system.status())
