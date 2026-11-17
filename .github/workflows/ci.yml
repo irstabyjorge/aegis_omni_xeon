@@ -31,3 +31,6 @@ jobs:
 
       - name: Import check
         run: python -c "import aegis_omni; import aegis_real; import aegis_unified"
+
+      - name: Guard Python 3.10 UTC compatibility across all sources
+        run: python -m unittest tests.test_python310_utc_compat -v
