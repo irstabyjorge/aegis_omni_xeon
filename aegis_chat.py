@@ -10,7 +10,7 @@ __version__ = "3.0.0"
 
 import sys, os, json, re, subprocess, threading, time, platform, shutil
 from pathlib import Path
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -1115,7 +1115,7 @@ Open Tools panel for one-click security operations.""")
             log_file = LOGS / "chat_history.jsonl"
             with open(log_file, "a") as f:
                 f.write(json.dumps({
-                    "time": datetime.now(UTC).isoformat(),
+                    "time": datetime.now(timezone.utc).isoformat(),
                     "user": user_msg,
                     "aegis": aegis_response[:500],
                 }, default=str) + "\n")
