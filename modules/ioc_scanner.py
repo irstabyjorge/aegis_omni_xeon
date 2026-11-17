@@ -9,7 +9,7 @@ modified system binaries, and known malicious file patterns.
 """
 
 import json, os, subprocess, hashlib, re, stat
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
 
@@ -55,7 +55,7 @@ def _run(cmd, timeout=10):
 
 def _log(event, payload):
     with open(LOGS / "ioc_scan.jsonl", "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
 
 
 def check_suspicious_processes():
@@ -127,8 +127,8 @@ def check_persistence_mechanisms():
         p = Path(loc)
         if p.is_file():
             try:
-                mtime = datetime.fromtimestamp(p.stat().st_mtime, UTC)
-                age_days = (datetime.now(UTC) - mtime).days
+                mtime = datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
+                age_days = (datetime.now(timezone.utc) - mtime).days
                 if age_days < 7:
                     findings.append({
                         "type": "recently_modified_persistence",
@@ -141,8 +141,8 @@ def check_persistence_mechanisms():
         elif p.is_dir():
             try:
                 for f in p.iterdir():
-                    mtime = datetime.fromtimestamp(f.stat().st_mtime, UTC)
-                    age_days = (datetime.now(UTC) - mtime).days
+                    mtime = datetime.fromtimestamp(f.stat().st_mtime, timezone.utc)
+                    age_days = (datetime.now(timezone.utc) - mtime).days
                     if age_days < 3:
                         findings.append({
                             "type": "new_persistence_entry",
@@ -191,8 +191,8 @@ def check_ssh_keys():
         try:
             content = ak_path.read_text()
             keys = [l.strip() for l in content.splitlines() if l.strip() and not l.startswith("#")]
-            mtime = datetime.fromtimestamp(ak_path.stat().st_mtime, UTC)
-            age_days = (datetime.now(UTC) - mtime).days
+            mtime = datetime.fromtimestamp(ak_path.stat().st_mtime, timezone.utc)
+            age_days = (datetime.now(timezone.utc) - mtime).days
 
             for key in keys:
                 parts = key.split()
@@ -238,7 +238,7 @@ def check_hidden_files():
                             "size": st.st_size if item.is_file() else None,
                             "owner_uid": st.st_uid,
                             "executable": bool(st.st_mode & stat.S_IXUSR) if item.is_file() else False,
-                            "modified": datetime.fromtimestamp(st.st_mtime, UTC).isoformat(),
+                            "modified": datetime.fromtimestamp(st.st_mtime, timezone.utc).isoformat(),
                             "severity": 8 if (item.is_file() and st.st_mode & stat.S_IXUSR) else 6,
                         })
                     except (PermissionError, OSError):
@@ -382,7 +382,7 @@ def full_scan():
     total_findings = sum(c.get("total_flagged", c.get("total_found", c.get("total_suspicious", len(c.get("findings", []))))) for c in checks)
 
     report = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "scan_type": "ioc_full_scan",
         "total_checks": len(checks),
         "total_findings": total_findings,
