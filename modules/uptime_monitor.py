@@ -8,7 +8,7 @@ Logs response times and status for SLA reporting.
 """
 
 import json, socket, time, ssl, hashlib
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import urlopen, Request
 from urllib.error import URLError
@@ -20,7 +20,7 @@ MONITOR_LOG = LOGS / "uptime_events.jsonl"
 
 def _log(event, payload):
     with open(MONITOR_LOG, "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
 
 
 def check_http(url, timeout=10):
@@ -133,7 +133,7 @@ def run_checks(targets=None):
         elif t["type"] == "ssl":
             results.append(check_ssl_cert(t["hostname"]))
     return {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "checks": len(results),
         "up": sum(1 for r in results if r.get("status") in ("up", "open", "resolved", "valid")),
         "down": sum(1 for r in results if r.get("status") not in ("up", "open", "resolved", "valid")),
