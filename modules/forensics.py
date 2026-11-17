@@ -8,7 +8,7 @@ kernel modules, open file handles, and network socket state for incident respons
 """
 
 import json, os, subprocess, hashlib
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
 
@@ -26,12 +26,12 @@ def _run(cmd, timeout=15):
 
 def _log(event, payload):
     with open(LOGS / "forensics.jsonl", "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
 
 
 def capture_volatile_state():
     state = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "hostname": _run("hostname"),
         "uptime": _run("uptime -p"),
         "current_users": _run("who 2>/dev/null"),
@@ -63,7 +63,7 @@ def analyze_recent_file_changes(hours=24):
                 st = os.stat(filepath)
                 findings.append({
                     "path": filepath,
-                    "modified": datetime.fromtimestamp(st.st_mtime, UTC).isoformat(),
+                    "modified": datetime.fromtimestamp(st.st_mtime, timezone.utc).isoformat(),
                     "size": st.st_size,
                     "uid": st.st_uid,
                     "mode": oct(st.st_mode),
@@ -201,7 +201,7 @@ def hash_critical_binaries():
                 hashes[b] = {
                     "sha256": h,
                     "size": p.stat().st_size,
-                    "modified": datetime.fromtimestamp(p.stat().st_mtime, UTC).isoformat(),
+                    "modified": datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat(),
                 }
             except (PermissionError, OSError):
                 hashes[b] = {"error": "permission_denied"}
@@ -216,7 +216,7 @@ def hash_critical_binaries():
 
 def full_forensic_capture():
     results = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "volatile_state": capture_volatile_state(),
         "recent_changes": analyze_recent_file_changes(24),
         "kernel_modules": check_loaded_modules(),
@@ -237,7 +237,7 @@ def full_forensic_capture():
         "severity": max_severity,
     })
 
-    report_path = LOGS / f"forensic_report_{datetime.now(UTC).strftime('%Y%m%d_%H%M%S')}.json"
+    report_path = LOGS / f"forensic_report_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json"
     with open(report_path, "w") as f:
         json.dump(results, f, indent=2, default=str)
 
