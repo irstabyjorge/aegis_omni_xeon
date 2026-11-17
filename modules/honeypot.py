@@ -8,7 +8,7 @@ and logs every connection attempt with full metadata for threat intelligence.
 """
 
 import json, socket, threading, time, select
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
 
@@ -40,7 +40,7 @@ DEFAULT_PORTS = [2222, 2121, 2323, 8080, 9200, 11211, 6380, 27018]
 def _log(event, payload):
     with open(HONEYPOT_LOG, "a") as f:
         f.write(json.dumps({
-            "time": datetime.now(UTC).isoformat(),
+            "time": datetime.now(timezone.utc).isoformat(),
             "event": event,
             "payload": payload,
         }, default=str) + "\n")
@@ -142,7 +142,7 @@ def analyze_honeypot_logs():
         return {"status": "parse_error"}
 
     return {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "total_connections": len(connections),
         "unique_ips": len(ip_counter),
         "top_attackers": [{"ip": ip, "count": c} for ip, c in ip_counter.most_common(20)],

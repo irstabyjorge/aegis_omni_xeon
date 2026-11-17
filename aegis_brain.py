@@ -12,7 +12,7 @@ __version__ = "2.0.0"
 
 import json, os, sys, time, hashlib, threading
 from pathlib import Path
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 
 BASE = Path.home() / "aegis_omni_xeon"
 BRAIN_DIR = BASE / "brain"
@@ -76,7 +76,7 @@ class Memory:
     def save_conversation(self, user_msg, assistant_msg):
         with open(self.conversations_file, "a") as f:
             f.write(json.dumps({
-                "time": datetime.now(UTC).isoformat(),
+                "time": datetime.now(timezone.utc).isoformat(),
                 "user": user_msg[:1000],
                 "assistant": assistant_msg[:2000],
             }) + "\n")
@@ -84,7 +84,7 @@ class Memory:
     def save_fact(self, fact, source="conversation"):
         with open(self.facts_file, "a") as f:
             f.write(json.dumps({
-                "time": datetime.now(UTC).isoformat(),
+                "time": datetime.now(timezone.utc).isoformat(),
                 "fact": fact,
                 "source": source,
             }) + "\n")
@@ -92,7 +92,7 @@ class Memory:
     def save_scan_result(self, scan_type, summary):
         with open(self.scan_history_file, "a") as f:
             f.write(json.dumps({
-                "time": datetime.now(UTC).isoformat(),
+                "time": datetime.now(timezone.utc).isoformat(),
                 "type": scan_type,
                 "summary": summary[:500],
             }) + "\n")

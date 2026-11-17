@@ -9,7 +9,7 @@ web shell signatures. Inspired by SecLists and PayloadsAllTheThings.
 """
 
 import json, re, os
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
 
@@ -82,7 +82,7 @@ SEVERITY_MAP = {
 
 def _log(event, payload):
     with open(LOGS / "payload_detection.jsonl", "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
 
 
 def scan_file(filepath, max_lines=10000):
@@ -155,7 +155,7 @@ def scan_web_logs():
                 all_ips[ip_info["ip"]] += ip_info["hits"]
 
     report = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "scan_type": "web_log_payload_scan",
         "files_scanned": len(results),
         "total_detections": total_detections,
@@ -192,7 +192,7 @@ def scan_directory(directory, extensions=None):
                     pass
 
     return {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "scan_type": "directory_payload_scan",
         "directory": directory,
         "files_scanned": files_scanned,

@@ -11,7 +11,7 @@ __version__ = "2.0.0"
 
 import json, os, sys, time, threading, signal
 from pathlib import Path
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -28,7 +28,7 @@ DAEMON_LOG = LOGS / "daemon.jsonl"
 def _log(event, payload=None):
     with open(DAEMON_LOG, "a") as f:
         f.write(json.dumps({
-            "time": datetime.now(UTC).isoformat(),
+            "time": datetime.now(timezone.utc).isoformat(),
             "event": event,
             "payload": payload or {},
         }, default=str) + "\n")
@@ -44,7 +44,7 @@ def _load_state():
             return json.loads(STATE_FILE.read_text())
         except json.JSONDecodeError:
             pass
-    return {"started": datetime.now(UTC).isoformat(), "scans": 0, "threats_found": 0, "uptime_checks": 0}
+    return {"started": datetime.now(timezone.utc).isoformat(), "scans": 0, "threats_found": 0, "uptime_checks": 0}
 
 
 def scheduled_threat_scan(state):
@@ -52,7 +52,7 @@ def scheduled_threat_scan(state):
         from modules.ioc_scanner import full_scan as ioc_scan
         result = ioc_scan()
         state["scans"] += 1
-        state["last_scan"] = datetime.now(UTC).isoformat()
+        state["last_scan"] = datetime.now(timezone.utc).isoformat()
         state["last_scan_result"] = result.get("compromise_likelihood", "UNKNOWN")
         findings = result.get("total_findings", 0)
         state["threats_found"] += findings
@@ -68,7 +68,7 @@ def scheduled_vuln_check(state):
     try:
         from modules.vuln_scanner import full_scan
         result = full_scan()
-        state["last_vuln_scan"] = datetime.now(UTC).isoformat()
+        state["last_vuln_scan"] = datetime.now(timezone.utc).isoformat()
         state["last_vuln_score"] = result.get("security_score", 0)
         _log("scheduled_vuln_scan", {
             "score": result.get("security_score"),
@@ -83,7 +83,7 @@ def scheduled_uptime_check(state):
         from modules.uptime_monitor import run_checks
         result = run_checks()
         state["uptime_checks"] += 1
-        state["last_uptime"] = datetime.now(UTC).isoformat()
+        state["last_uptime"] = datetime.now(timezone.utc).isoformat()
         state["services_up"] = result.get("up", 0)
         state["services_total"] = result.get("checks", 0)
         _log("scheduled_uptime", {
@@ -98,7 +98,7 @@ def scheduled_log_analysis(state):
     try:
         from modules.log_analyzer import analyze_system_logs
         result = analyze_system_logs()
-        state["last_log_analysis"] = datetime.now(UTC).isoformat()
+        state["last_log_analysis"] = datetime.now(timezone.utc).isoformat()
         state["last_log_findings"] = result.get("total_findings", 0)
         _log("scheduled_log_analysis", {
             "findings": result.get("total_findings", 0),
@@ -129,7 +129,7 @@ def self_learn(state):
 
             if actions:
                 insight = {
-                    "time": datetime.now(UTC).isoformat(),
+                    "time": datetime.now(timezone.utc).isoformat(),
                     "type": "threat_pattern_summary",
                     "total_events": sum(actions.values()),
                     "action_distribution": dict(actions.most_common(5)),
@@ -137,7 +137,7 @@ def self_learn(state):
                 }
                 with open(knowledge_file, "a") as f:
                     f.write(json.dumps(insight) + "\n")
-                state["last_learning"] = datetime.now(UTC).isoformat()
+                state["last_learning"] = datetime.now(timezone.utc).isoformat()
                 _log("self_learning", {"events_analyzed": sum(actions.values())})
 
     except Exception as e:
@@ -147,7 +147,7 @@ def self_learn(state):
 def run_daemon():
     _log("daemon_start", {"version": __version__, "pid": os.getpid()})
     state = _load_state()
-    state["started"] = datetime.now(UTC).isoformat()
+    state["started"] = datetime.now(timezone.utc).isoformat()
     state["pid"] = os.getpid()
 
     running = True

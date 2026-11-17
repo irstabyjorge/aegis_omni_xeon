@@ -8,7 +8,7 @@ exposed services, and security policy compliance.
 """
 
 import json, os, subprocess, stat
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 
 LOGS = Path.home() / "aegis_omni_xeon" / "logs"
@@ -25,7 +25,7 @@ def _run(cmd, timeout=10):
 
 def _log(event, payload):
     with open(LOGS / "vuln_scan.jsonl", "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "event": event, "payload": payload}, default=str) + "\n")
 
 
 def check_suid_files():
@@ -198,7 +198,7 @@ def full_scan():
     overall_score = round(10 - (sum(c["severity"] for c in checks) / len(checks)), 1)
 
     report = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "security_score": max(0, overall_score),
         "total_checks": len(checks),
         "critical": len(critical),

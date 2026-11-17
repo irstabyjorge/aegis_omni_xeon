@@ -6,7 +6,7 @@ __version__ = "2.0.0"
 
 import os, time, json, hashlib, ipaddress, socket, queue, threading, sys
 from dataclasses import dataclass, field
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from typing import Dict, Any, List
 from pathlib import Path
 from collections import Counter
@@ -89,7 +89,7 @@ CRYPTO_PORTS = {8332, 8333, 18332, 18333, 30303, 9735, 18080, 18081}
 
 def log(event: str, payload: Dict[str, Any] = None):
     entry = {
-        "time": datetime.now(UTC).isoformat(),
+        "time": datetime.now(timezone.utc).isoformat(),
         "event": event,
         "payload": payload or {}
     }
@@ -127,7 +127,7 @@ class Threat:
     score: float = 0.0
     action: str = "MONITOR"
     level: str = "LOW"
-    timestamp: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
 class PolicyEngine:
@@ -383,7 +383,7 @@ class SystemAnalyzer:
             "disk_percent": psutil.disk_usage("/").percent,
             "logical_cpus": psutil.cpu_count(logical=True),
             "physical_cpus": psutil.cpu_count(logical=False),
-            "boot_time": datetime.fromtimestamp(psutil.boot_time(), UTC).isoformat(),
+            "boot_time": datetime.fromtimestamp(psutil.boot_time(), timezone.utc).isoformat(),
             "uptime_hours": round((time.time() - psutil.boot_time()) / 3600, 1),
         }
         log("system_status", data)
@@ -630,7 +630,7 @@ class Orchestrator:
             for t in threats:
                 self.qbyte.auto_blocklist(t)
             console.print_json(json.dumps({
-                "time": datetime.now(UTC).isoformat(),
+                "time": datetime.now(timezone.utc).isoformat(),
                 "cpu": psutil.cpu_percent(interval=1),
                 "memory": psutil.virtual_memory().percent,
                 "active_threats": len(threats),

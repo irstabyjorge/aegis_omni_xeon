@@ -8,7 +8,7 @@ Produces structured threat reports from raw log data.
 """
 
 import json, re, os
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from pathlib import Path
 from collections import Counter
 
@@ -127,7 +127,7 @@ def analyze_system_logs():
                 all_ips[ip_info["ip"]] += ip_info["count"]
 
     summary = {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "files_analyzed": len(results),
         "total_findings": total_findings,
         "categories": dict(all_categories.most_common()),
@@ -136,7 +136,7 @@ def analyze_system_logs():
     }
 
     with open(LOGS / "log_analysis.jsonl", "a") as f:
-        f.write(json.dumps({"time": datetime.now(UTC).isoformat(), "summary": {
+        f.write(json.dumps({"time": datetime.now(timezone.utc).isoformat(), "summary": {
             "files": len(results), "findings": total_findings, "top_category": all_categories.most_common(1)
         }}) + "\n")
 
@@ -166,7 +166,7 @@ def analyze_aegis_threats():
         return {"status": "parse_error"}
 
     return {
-        "timestamp": datetime.now(UTC).isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "action_distribution": dict(actions.most_common()),
         "threat_levels": dict(levels.most_common()),
         "top_flagged_ips": [{"ip": ip, "count": c} for ip, c in ips.most_common(20)],
