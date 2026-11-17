@@ -6,7 +6,7 @@ __version__ = "2.0.0"
 
 import os, json, subprocess, hashlib, time, ipaddress, socket, sys
 from pathlib import Path
-from datetime import datetime, UTC
+from datetime import datetime, timezone
 from collections import Counter
 import psutil
 from rich.console import Console
@@ -78,7 +78,7 @@ BLOCKLIST = _load_lines(BLOCKLIST_FILE)
 KNOWN_GOOD = _load_lines(KNOWN_GOOD_FILE)
 
 def now():
-    return datetime.now(UTC).isoformat()
+    return datetime.now(timezone.utc).isoformat()
 
 def log(event, payload):
     with open(LOGFILE, "a") as f:
@@ -119,7 +119,7 @@ def status():
         "disk_percent": psutil.disk_usage("/").percent,
         "logical_cpus": psutil.cpu_count(logical=True),
         "physical_cpus": psutil.cpu_count(logical=False),
-        "boot_time": datetime.fromtimestamp(psutil.boot_time(), UTC).isoformat(),
+        "boot_time": datetime.fromtimestamp(psutil.boot_time(), timezone.utc).isoformat(),
         "uptime_hours": round((time.time() - psutil.boot_time()) / 3600, 1),
     }
     log("status", data)
